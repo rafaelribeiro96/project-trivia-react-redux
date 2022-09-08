@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { login } from '../redux/actions/action';
+import FetchApi from '../services/FetchApi';
 
-export default class Login extends Component {
+class Login extends Component {
   state = {
     name: '',
     email: '',
@@ -27,6 +31,15 @@ export default class Login extends Component {
     }
   };
 
+  handleClick = async () => {
+    const { name, email } = this.state;
+    const { dispatch, history } = this.props;
+    const resultApi = await FetchApi();
+    localStorage.setItem('token', resultApi);
+    dispatch(login({ name, email }));
+    history.push('/home');
+  };
+
   render() {
     const { name, email, isDisable } = this.state;
     return (
@@ -49,7 +62,7 @@ export default class Login extends Component {
           <button
             type="button"
             name="botao"
-            onClick={ this.validationButon }
+            onClick={ this.handleClick }
             disabled={ isDisable }
             data-testid="btn-play"
           >
@@ -60,3 +73,12 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default connect()(Login);
