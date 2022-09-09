@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import userLogin from './userLogin';
+import player from './player';
 
-const rootReducer = combineReducers({ userLogin });
+const rootReducer = combineReducers({ player });
 
 export default rootReducer;

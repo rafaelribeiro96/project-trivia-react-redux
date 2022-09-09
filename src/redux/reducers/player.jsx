@@ -1,4 +1,4 @@
-import { login } from '../actions/action';
+import { LOGIN } from '../actions/action';
 
 const INICIAL_STATE = {
   name: '',
@@ -9,7 +9,7 @@ const INICIAL_STATE = {
 
 const player = (state = INICIAL_STATE, action) => {
   switch (action.type) {
-  case login:
+  case LOGIN:
     return {
       ...state,
       gravatarEmail: action.payload.email,
