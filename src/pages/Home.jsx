@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import TriviaApi from '../services/TriviaApi';
 
+const order = [Math.random(), Math.random(), Math.random(), Math.random(), Math.random()];
 export default class Home extends Component {
   state = {
     trivia: [],
     indice: 0,
     clicked: false,
+    isDisabled: false,
+    timer: 30,
   };
 
   async componentDidMount() {
@@ -15,6 +18,8 @@ export default class Home extends Component {
     if (response.response_code === 0) {
       this.setState({
         trivia: response.results,
+      }, () => {
+        this.contTimer();
       });
     } else {
       this.setState({
@@ -26,15 +31,30 @@ export default class Home extends Component {
     }
   }
 
+  contTimer = () => {
+    /* const { clicked, isDisabled } = this.state; */
+    const num = 1000;
+    const intervalue = setInterval(() => {
+      const { timer } = this.state;
+      this.setState({ timer: timer - 1 });
+      console.log(timer);
+      if (timer < 0) {
+        this.setState({
+          isDisabled: true,
+        }, () => clearInterval(intervalue));
+      }
+    }, num);
+  };
+
   showAnswer = () => {
     this.setState({ clicked: true });
   };
 
   renderQuestion = (indice, trivia) => {
-    const { clicked } = this.state;
+    const { clicked, isDisabled } = this.state;
     const num = 0.5;
     const result = [trivia[indice].correct_answer, ...trivia[indice].incorrect_answers]
-      .sort(() => Math.random() - num);
+      .sort(() => order[indice] - num);
     return (
       <div>
         <h3 data-testid="question-category">{trivia[indice].category}</h3>
@@ -46,6 +66,7 @@ export default class Home extends Component {
                 <button
                   type="button"
                   name="correct"
+                  disabled={ isDisabled }
                   className={ clicked ? 'correct' : 'button' }
                   data-testid="correct-answer"
                   onClick={ this.showAnswer }
@@ -57,6 +78,7 @@ export default class Home extends Component {
                 <button
                   type="button"
                   name="incorrect"
+                  disabled={ isDisabled }
                   className={ clicked ? 'incorrect' : 'button' }
                   onClick={ this.showAnswer }
                   data-testid={ `wrong-answer-${index}` }
