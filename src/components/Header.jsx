@@ -20,7 +20,7 @@ class Header extends Component {
   render() {
     const { url } = this.state;
     const { name, score } = this.props;
-    console.log(name);
+    /* console.log(name); */
     return (
       <header>
         <img src={ url } alt="Gravatar" data-testid="header-profile-picture" />
