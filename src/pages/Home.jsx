@@ -7,6 +7,7 @@ export default class Home extends Component {
   state = {
     trivia: [],
     indice: 0,
+    clicked: false,
   };
 
   async componentDidMount() {
@@ -25,7 +26,12 @@ export default class Home extends Component {
     }
   }
 
+  showAnswer = () => {
+    this.setState({ clicked: true });
+  };
+
   renderQuestion = (indice, trivia) => {
+    const { clicked } = this.state;
     const num = 0.5;
     const result = [trivia[indice].correct_answer, ...trivia[indice].incorrect_answers]
       .sort(() => Math.random() - num);
@@ -39,7 +45,10 @@ export default class Home extends Component {
               ? (
                 <button
                   type="button"
+                  name="correct"
+                  className={ clicked ? 'correct' : 'button' }
                   data-testid="correct-answer"
+                  onClick={ this.showAnswer }
                 >
                   {item}
                 </button>
@@ -47,6 +56,9 @@ export default class Home extends Component {
               : (
                 <button
                   type="button"
+                  name="incorrect"
+                  className={ clicked ? 'incorrect' : 'button' }
+                  onClick={ this.showAnswer }
                   data-testid={ `wrong-answer-${index}` }
                 >
                   {item}
