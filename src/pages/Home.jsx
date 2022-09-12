@@ -6,7 +6,7 @@ import { assertionValue, scoreValue } from '../redux/actions/action';
 import TriviaApi from '../services/TriviaApi';
 
 const order = [Math.random(), Math.random(), Math.random(),
-  Math.random(), Math.random(), Math.random()];
+  Math.random(), Math.random()];
 /* let assertion = 0; */
 class Home extends Component {
   state = {

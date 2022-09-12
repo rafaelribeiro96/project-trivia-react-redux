@@ -1,10 +1,11 @@
-import { ASSERT, LOGIN, SCORE } from '../actions/action';
+import { ASSERT, LOGIN, NEWGAME, SAVELOCALE, SCORE } from '../actions/action';
 
 const INICIAL_STATE = {
   name: '',
   assertions: 0,
   score: 0,
   gravatarEmail: '',
+  locale: [],
 };
 
 const player = (state = INICIAL_STATE, action) => {
@@ -24,6 +25,16 @@ const player = (state = INICIAL_STATE, action) => {
     return {
       ...state,
       assertions: action.payload,
+    };
+  case SAVELOCALE:
+    return {
+      ...state,
+      locale: [...state.locale, action.payload],
+    };
+  case NEWGAME:
+    return {
+      ...state,
+      score: 0,
     };
   default:
     return state;
