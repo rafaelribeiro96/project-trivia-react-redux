@@ -2,6 +2,8 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import App from '../App';
+import Feedback from "../pages/Feedback";
+import Ranking from '../pages/Ranking';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 
 describe('Testing initial page "Login"', () => {
@@ -28,7 +30,7 @@ describe('Testing initial page "Login"', () => {
     expect(textSetting).toBeInTheDocument();
   });
   it('Test submit values', async () => {
-    /* const { history } =  */renderWithRouterAndRedux(<App />, { initialEntries: ['/'] });
+    renderWithRouterAndRedux(<App />, { initialEntries: ['/'] });
     const { nameInput, emailInput, textEntrar } = info();
 
     userEvent.type(emailInput, emails);
@@ -36,13 +38,10 @@ describe('Testing initial page "Login"', () => {
 
     expect(nameInput).toHaveValue(name);
     expect(emailInput).toHaveValue(emails);
-    /* const brasil = await screen.findByText('Dólar Americano/Real Brasileiro'); */
 
     userEvent.click(textEntrar);
     const named = await screen.findByTestId('header-player-name');
     expect(named).toBeInTheDocument();
-    /* const imgD = await screen.findByTestId('header-profile-picture');
-    expect(imgD).toBeInTheDocument(); */
   });
   it('Test settings submit', () => {
     const { history } = renderWithRouterAndRedux(<App />, { initialEntries: ['/'] });  
@@ -52,4 +51,82 @@ describe('Testing initial page "Login"', () => {
 
     expect(history.location.pathname).toBe('/settings');
   });
+  it('Test feedback', () => {
+    const { history } = renderWithRouterAndRedux(<App />);
+    history.push('/feedback');
+    
+    const msgs = screen.getByTestId('feedback-text');
+    expect(msgs).toBeInTheDocument();
+    expect(msgs).toHaveTextContent('Could be better...');
+    const feedbacks = screen.getByTestId('header-player-name');
+    expect(feedbacks).toBeInTheDocument();
+    
+    const totalQuesion = screen.getByTestId('feedback-total-question');
+    expect(totalQuesion).toBeInTheDocument();
+
+    const newGames = screen.getByTestId('btn-play-again');
+    userEvent.click(newGames);
+    expect(history.location.pathname).toEqual('/');
+    
+  });
+  it('Test feedback redirect ranking', () => {
+    const { history } = renderWithRouterAndRedux(<App />);
+    history.push('/feedback');
+    const screenRanking = screen.getByTestId('btn-ranking');
+    userEvent.click(screenRanking);
+    expect(history.location.pathname).toEqual('/ranking');
+
+    const playerScore = screen.getByTestId('player-score-0');
+    expect(playerScore).toBeInTheDocument();
+    
+    const butonAgain = screen.getByTestId('btn-go-home');
+    expect(butonAgain).toBeInTheDocument();
+    userEvent.click(butonAgain);
+    expect(history.location.pathname).toEqual('/');
+    
+  });
+  it('Testing initial state Feedback', () => {
+    const initialState = {
+      player: {
+        name: 'Reinaldo',
+        assertions: 5,
+        score: 5,
+        gravatarEmail: 'meuemail@gmail.com',
+        locale: [],
+      }
+    }
+    renderWithRouterAndRedux(<Feedback />, initialState);
+    expect(screen.getByTestId("header-score")).toBeInTheDocument;
+  });
+  it('Testing initial state Ranking', () => {
+    const initialState = {
+      player: {
+        name: 'Reinaldo',
+        assertions: 5,
+        score: 235,
+        gravatarEmail: 'meuemail@gmail.com',
+        locale: [{
+          name: 'Reinaldo Santos',
+          score: 210,
+          url: 'https://www.gravatar.com/avatar/134c8308fa8caadd5a640f47f5e9343a',
+        },
+          {
+            name: 'Reinaldo',
+            score: 235,
+            url: 'https://www.gravatar.com/avatar/134c8308fa8caadd5a640f47f5e9343a',
+        }],
+      }
+    }
+    renderWithRouterAndRedux(<Ranking />, initialState);
+
+    const ranking1 = screen.getByTestId('player-score-0');
+    expect(ranking1).toBeInTheDocument();
+    const rankingName = screen.getByTestId('player-name-0');
+    expect(rankingName).toBeInTheDocument();
+
+    const ranking2 = screen.getByTestId('player-score-1');
+    expect(ranking2).toBeInTheDocument();
+    const rankingName1 = screen.getByTestId('player-name-1');
+    expect(rankingName1).toBeInTheDocument();
+  })
 });
