@@ -53,7 +53,7 @@ class Feedback extends Component {
       msg = 'Well Done!';
     }
     return (
-      <div data-testid="feedback-text">
+      <div>
         <img src={ urlLocale } alt="img" data-testid="header-profile-picture" />
         <h3 data-testid="header-player-name">{ nameLocale }</h3>
         <h3 data-testid="header-score">{scoreLocale}</h3>
