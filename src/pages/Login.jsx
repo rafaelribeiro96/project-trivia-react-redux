@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { login } from '../redux/actions/action';
 import FetchApi from '../services/FetchApi';
 
@@ -37,6 +37,7 @@ class Login extends Component {
     const resultApi = await FetchApi();
     localStorage.setItem('token', resultApi);
     dispatch(login({ name, email }));
+    /* console.log(history); */
     history.push('/home');
   };
 

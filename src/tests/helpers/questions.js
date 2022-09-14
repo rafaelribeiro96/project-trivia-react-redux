@@ -1,4 +1,4 @@
-const questionsResponse = {
+export const questionsResponse = {
   response_code: 0,
   results: [
     {
@@ -62,9 +62,9 @@ const questionsResponse = {
   ],
 };
 
-const invalidTokenQuestionsResponse = {
+export const invalidTokenQuestionsResponse = {
   response_code: 3,
   results: [],
 }
 
-module.exports = { questionsResponse, invalidTokenQuestionsResponse };
+

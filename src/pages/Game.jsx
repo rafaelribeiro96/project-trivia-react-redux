@@ -8,7 +8,7 @@ import TriviaApi from '../services/TriviaApi';
 const order = [Math.random(), Math.random(), Math.random(),
   Math.random(), Math.random()];
 /* let assertion = 0; */
-class Home extends Component {
+class Game extends Component {
   state = {
     trivia: [],
     indice: 0,
@@ -38,7 +38,6 @@ class Home extends Component {
   }
 
   contTimer = () => {
-    /* const { clicked, isDisabled } = this.state; */
     const num = 1000;
     const intervalue = setInterval(() => {
       const { timer } = this.state;
@@ -76,7 +75,6 @@ class Home extends Component {
     this.setState({
       timer: 0,
     });
-    /* console.log(asserts); */
   };
 
   nextButon = () => {
@@ -119,6 +117,7 @@ class Home extends Component {
       .sort(() => order[indice] - num);
     return (
       <div>
+        <h2>Category</h2>
         <h3 data-testid="question-category">{trivia[indice].category}</h3>
         <h3 data-testid="question-text">{trivia[indice].question}</h3>
         <div data-testid="answer-options">
@@ -126,6 +125,7 @@ class Home extends Component {
             item === trivia[indice].correct_answer
               ? (
                 <button
+                  key={ index }
                   type="button"
                   name="correct"
                   disabled={ isDisabled }
@@ -138,6 +138,7 @@ class Home extends Component {
               )
               : (
                 <button
+                  key={ index }
                   type="button"
                   name="incorrect"
                   disabled={ isDisabled }
@@ -175,11 +176,11 @@ class Home extends Component {
   }
 }
 
-Home.propTypes = {
+Game.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default connect()(Home);
+export default connect()(Game);
