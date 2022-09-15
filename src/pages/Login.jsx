@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../redux/actions/action';
 import FetchApi from '../services/FetchApi';
+import './Login.css';
 
 class Login extends Component {
   state = {
@@ -49,39 +50,46 @@ class Login extends Component {
   render() {
     const { name, email, isDisable } = this.state;
     return (
-      <div>
-        <form>
-          <input
-            type="text"
-            name="name"
-            onChange={ this.handleChange }
-            value={ name }
-            data-testid="input-player-name"
-          />
-          <input
-            type="email"
-            name="email"
-            onChange={ this.handleChange }
-            value={ email }
-            data-testid="input-gravatar-email"
-          />
+      <div className="geral-page-login">
+        <div className="content-page-login">
+
+          <form className="form-page-login">
+            <input
+              type="text"
+              name="name"
+              placeholder="Nome de usuário"
+              onChange={ this.handleChange }
+              value={ name }
+              data-testid="input-player-name"
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="E-mail"
+              onChange={ this.handleChange }
+              value={ email }
+              data-testid="input-gravatar-email"
+            />
+            <button
+              type="button"
+              name="botao"
+              onClick={ this.handleClick }
+              disabled={ isDisable }
+              data-testid="btn-play"
+            >
+              Play
+            </button>
+          </form>
           <button
+            className="button-page-login"
             type="button"
-            name="botao"
-            onClick={ this.handleClick }
-            disabled={ isDisable }
-            data-testid="btn-play"
+            data-testid="btn-settings"
+            onClick={ this.rendSettings }
           >
-            Play
+            Settings
           </button>
-        </form>
-        <button
-          type="button"
-          data-testid="btn-settings"
-          onClick={ this.rendSettings }
-        >
-          Settings
-        </button>
+
+        </div>
       </div>
     );
   }

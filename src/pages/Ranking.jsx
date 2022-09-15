@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { newGame } from '../redux/actions/action';
+import './Ranking.css';
 
 class Ranking extends Component {
   state = {
@@ -25,17 +26,25 @@ class Ranking extends Component {
   renderRanking = (ranking) => ranking.length > 0 && (ranking
     .sort((a, b) => b.score - a.score)
     .map((item, index) => (
-      <div key={ index }>
+      <div className="player-ranking" key={ index }>
         <img src={ item.url } alt="imagem" />
-        <h4 data-testid={ `player-score-${index}` }>{item.score}</h4>
-        <h4 data-testid={ `player-name-${index}` }>{item.name}</h4>
+        <h4 data-testid={ `player-score-${index}` }>
+          Score:
+          {' '}
+          {item.score}
+        </h4>
+        <h4 data-testid={ `player-name-${index}` }>
+          Player:
+          {' '}
+          {item.name}
+        </h4>
       </div>
     )));
 
   render() {
     const { ranking } = this.state;
     return (
-      <div data-testid="ranking-title">
+      <div data-testid="ranking-title" className="geral-page-ranking">
         <h1>
           Ranking
         </h1>
@@ -44,7 +53,7 @@ class Ranking extends Component {
           type="button"
           onClick={ this.playAgain }
         >
-          playAgain
+          PLAY AGAIN
         </button>
         { this.renderRanking(ranking) }
       </div>

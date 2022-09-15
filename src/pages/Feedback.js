@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { newGame, saveLocale } from '../redux/actions/action';
+import './Feedback.css';
 
 class Feedback extends Component {
   state = {
@@ -53,14 +54,22 @@ class Feedback extends Component {
       msg = 'Well Done!';
     }
     return (
-      <div>
+      <div className="geral-page-feedback">
         <img src={ urlLocale } alt="img" data-testid="header-profile-picture" />
         <h3 data-testid="header-player-name">{ nameLocale }</h3>
-        <h3 data-testid="header-score">{scoreLocale}</h3>
+        <h3 className="none-display" data-testid="header-score">{scoreLocale}</h3>
         <h3 data-testid="feedback-text">{msg}</h3>
-        <h4>Seu desempenho!</h4>
-        <h4 data-testid="feedback-total-score">{scoreLocale}</h4>
-        <h4 data-testid="feedback-total-question">{assertions}</h4>
+        <h4 className="none-display">Seu desempenho!</h4>
+        <h4 data-testid="feedback-total-score">
+          Score:
+          {' '}
+          {scoreLocale}
+        </h4>
+        <h4 data-testid="feedback-total-question">
+          Assertions:
+          {' '}
+          {assertions}
+        </h4>
         <button
           data-testid="btn-play-again"
           type="button"

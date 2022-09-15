@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import { assertionValue, scoreValue } from '../redux/actions/action';
 import TriviaApi from '../services/TriviaApi';
+import './Game.css';
 
 const order = [Math.random(), Math.random(), Math.random(),
   Math.random(), Math.random()];
@@ -100,6 +101,7 @@ class Game extends Component {
     if (isDisabled) {
       return (
         <button
+          className="button-next"
           type="button"
           data-testid="btn-next"
           onClick={ this.nextButon }
@@ -110,17 +112,28 @@ class Game extends Component {
     }
   };
 
+  decodeEntity = (inputStr) => {
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = inputStr;
+    return textarea.value;
+  };
+
   renderQuestion = (indice, trivia) => {
     const { clicked, isDisabled } = this.state;
     const num = 0.5;
     const result = [trivia[indice].correct_answer, ...trivia[indice].incorrect_answers]
       .sort(() => order[indice] - num);
     return (
-      <div>
-        <h2>Category</h2>
-        <h3 data-testid="question-category">{trivia[indice].category}</h3>
-        <h3 data-testid="question-text">{trivia[indice].question}</h3>
-        <div data-testid="answer-options">
+      <div className="content-question-game">
+        <div className="quest-game">
+          <h3 data-testid="question-category">{trivia[indice].category}</h3>
+          <h3 data-testid="question-text">
+            {this
+              .decodeEntity(trivia[indice].question)}
+
+          </h3>
+        </div>
+        <div data-testid="answer-options" className="answer-options">
           {result.map((item, index) => (
             item === trivia[indice].correct_answer
               ? (
@@ -166,11 +179,17 @@ class Game extends Component {
       result = [];
     }
     return (
-      <div>
+      <div className="geral-page-game">
         <Header />
-        <h4>{timer}</h4>
-        {result}
-        {this.habilityButon()}
+        <div className="content-page-game">
+          <h3>
+            Time to answer:
+            {' '}
+            {timer}
+          </h3>
+          <h2>{result}</h2>
+          {this.habilityButon()}
+        </div>
       </div>
     );
   }

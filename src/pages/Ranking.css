@@ -1,0 +1,46 @@
+.geral-page-ranking {
+  align-items: center;
+
+  /* border: 1px red solid; */
+  display: flex;
+  flex-direction: column;
+  font-size: large;
+  height: 90vh;
+  justify-content: center;
+}
+
+.geral-page-ranking h4 {
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+.player-ranking {
+  align-items: center;
+  border: rgb(38, 38, 92) solid 1px;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  justify-content: center;
+  margin-top: 20px;
+  width: 150px;
+}
+
+button {
+  background-color: rgb(38, 38, 92);
+
+  /* border: yellow solid 1px; */
+  border-radius: 10px;
+  color: white;
+  font-weight: 800;
+  height: 40px;
+  margin-top: 10px;
+  width: 100px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.none-display {
+  display: none;
+}

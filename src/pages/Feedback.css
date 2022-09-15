@@ -1,0 +1,39 @@
+.geral-page-feedback {
+  align-items: center;
+
+  /* border: 1px red solid; */
+  display: flex;
+  flex-direction: column;
+  font-size: x-large;
+  height: 90vh;
+  justify-content: center;
+}
+
+/* .content-page-feedback {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 70%;
+  justify-content: center;
+  width: 90%;
+} */
+
+button {
+  background-color: rgb(38, 38, 92);
+
+  /* border: yellow solid 1px; */
+  border-radius: 10px;
+  color: white;
+  font-weight: 800;
+  height: 40px;
+  margin-top: 10px;
+  width: 100px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.none-display {
+  display: none;
+}
