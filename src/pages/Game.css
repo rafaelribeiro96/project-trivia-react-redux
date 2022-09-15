@@ -51,6 +51,10 @@
   width: 60%;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 .answer-options button:hover {
   background-color: rgb(47, 47, 100);
   width: 63%;
@@ -63,14 +67,8 @@
   flex-direction: column;
 }
 
-button:hover {
-  cursor: pointer;
-}
-
 .button-next {
   background-color: rgb(38, 38, 92);
-
-  /* border: yellow solid 1px; */
   border-radius: 10px;
   color: white;
   font-weight: 800;

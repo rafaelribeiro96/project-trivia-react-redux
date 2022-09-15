@@ -1,0 +1,9 @@
+.geral-page-settings {
+  align-items: center;
+
+  /* border: 1px red solid; */
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  justify-content: center;
+}
