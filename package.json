@@ -1,4 +1,4 @@
-{
+{ "homepage": "https://rafaelribeiro96.github.io/project-trivia-react-redux/",
   "name": "trivia-react-redux",
   "version": "0.1.0",
   "private": true,
@@ -20,6 +20,8 @@
     "redux-thunk": "^2.4.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "cy": "env CY_CLI=true cypress run",
     "cy:open": "cypress open --e2e --browser chrome",
     "start": "env ESLINT_NO_DEV_ERRORS=true react-scripts start",
