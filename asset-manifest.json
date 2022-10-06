@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/project-trivia-react-redux/static/css/main.93eaec1a.css",
+    "main.js": "/project-trivia-react-redux/static/js/main.cede11ea.js",
+    "index.html": "/project-trivia-react-redux/index.html",
+    "main.93eaec1a.css.map": "/project-trivia-react-redux/static/css/main.93eaec1a.css.map",
+    "main.cede11ea.js.map": "/project-trivia-react-redux/static/js/main.cede11ea.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.93eaec1a.css",
+    "static/js/main.cede11ea.js"
+  ]
+}
